@@ -6,11 +6,7 @@
 var addTwoPromises = async function(promise1, promise2) {
     const p1 = await promise1;
     const p2 = await promise2;
-
-    const promise = new Promise((resolve, reject)=>{
-        return resolve(p1+p2);
-    })
-    return promise;
+    return new Promise(res=> res(p1+p2))
 };
 
 /**

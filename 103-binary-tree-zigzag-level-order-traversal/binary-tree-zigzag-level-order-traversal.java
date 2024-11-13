@@ -15,30 +15,26 @@
  */
 class Solution {
     public void zighelp(TreeNode root, List<List<Integer>> ans){
-        Queue<TreeNode> queue = new LinkedList<>();
-
-        queue.offer(root);
-        boolean leftToRight = true;
-        while(!queue.isEmpty()){
-            int size = queue.size();
-            ArrayList<Integer> row = new ArrayList<>(Collections.nCopies(size,0));
+        Queue<TreeNode> que = new LinkedList<TreeNode>();
+        que.offer(root);
+        boolean isLeft = true;
+        while(!que.isEmpty()){
+            int size = que.size();
             
+            ArrayList<Integer> row = new ArrayList<Integer>(Collections.nCopies(size, 0));
             for(int i=0;i<size;i++){
-                
-                TreeNode it = queue.poll();
-                int index = leftToRight? i: size-1-i;
-                row.set(index, it.val);
-                if(it.left!=null){
-                    queue.offer(it.left);
-                }
-                if(it.right!=null){
-                    queue.offer(it.right);
-                }
-                
+                TreeNode node = que.poll();
+                int ind = isLeft? i: size-1-i;
+                row.set(ind, node.val);
+                if(node.left!=null)
+                que.offer(node.left);
+                if(node.right!=null)
+                que.offer(node.right);
             }
-            leftToRight = !leftToRight;
+            isLeft = !isLeft;
             ans.add(new ArrayList<>(row));
         }
+      
     }
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
      
